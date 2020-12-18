@@ -50,7 +50,7 @@ namespace HC_QLDatVeXemPhim.Controllers
         public IActionResult Create()
         {
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim");
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap");
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace HC_QLDatVeXemPhim.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
@@ -86,7 +86,7 @@ namespace HC_QLDatVeXemPhim.Controllers
                 return NotFound();
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
@@ -123,7 +123,7 @@ namespace HC_QLDatVeXemPhim.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaPhim"] = new SelectList(_context.Phims, "MaPhim", "TenPhim", lichChieuPhim.MaPhim);
-            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "MaRap", lichChieuPhim.MaRap);
+            ViewData["MaRap"] = new SelectList(_context.Raps, "MaRap", "TenRap", lichChieuPhim.MaRap);
             return View(lichChieuPhim);
         }
 
