@@ -13,12 +13,17 @@ namespace HC_QLDatVeXemPhim.Entities
         public int MaDatVe { get; set; }
 
         [Required]
-        [Display(Name = "Số điện thoại")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Số điện thoại người xem")]
         public string SoDienThoai { get; set; }
 
         [ForeignKey(nameof(LichChieuPhim))]
         [Display(Name = "Lịch chiếu")]
         public int MaLichChieuPhim { get; set; }
+
+        [Range(1, Int32.MaxValue)]
+        [Display(Name = "Số lượng đặt")]
+        public int SoLuong { get; set; } = 1;
 
         public LichChieuPhim LichChieuPhim { get; set; }
 

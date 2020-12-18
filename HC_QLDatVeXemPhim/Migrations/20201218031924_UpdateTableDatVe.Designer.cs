@@ -4,14 +4,16 @@ using HC_QLDatVeXemPhim.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HC_QLDatVeXemPhim.Migrations
 {
     [DbContext(typeof(DatVeContext))]
-    partial class DatVeContextModelSnapshot : ModelSnapshot
+    [Migration("20201218031924_UpdateTableDatVe")]
+    partial class UpdateTableDatVe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

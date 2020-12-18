@@ -1,19 +1,33 @@
-﻿@{
+﻿@model HC_QLDatVeXemPhim.Entities.DatVe
+
+@{
     ViewData["Title"] = "Đặt vé";
 }
 
 <h5 class="mb-3">Đặt vé xem phim</h5>
 
-<form action="/" method="post">
+@if(ViewBag.Message != null)
+{
+    <div class="alert alert-info" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+<form asp-controller="Home" asp-action="DatVe">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
-        <label for="sdt">Số điện thoại</label>
-        <input type="text" class="form-control" id="sdt" name="SoDienThoai" />
+        <label asp-for="SoDienThoai" class="control-label"></label>
+        <input asp-for="SoDienThoai" class="form-control" />
+        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="lichchieu">Lịch chiếu hiện tại</label>
-        <select id="lichchieu" class="custom-select">
-            <option>Alo</option>
-        </select>
+        <label asp-for="MaLichChieuPhim" class="control-label"></label>
+        <select asp-for="MaLichChieuPhim" class="form-control" asp-items="ViewBag.LichChieu"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="SoLuong" class="control-label"></label>
+        <input asp-for="SoLuong" class="form-control" />
+        <span asp-validation-for="SoLuong" class="text-danger"></span>
     </div>
     <div class="text-left">
         <button type="submit" class="btn btn-primary">Đặt vé</button>

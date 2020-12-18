@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HC_QLDatVeXemPhim.Core;
 using HC_QLDatVeXemPhim.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HC_QLDatVeXemPhim.Controllers
 {
@@ -38,9 +39,64 @@ namespace HC_QLDatVeXemPhim.Controllers
             return View();
         }
 
-        public IActionResult DatVe()
+        public async Task<IActionResult> DatVe()
         {
+            var lichchieus = await _context.LichChieuPhims
+                .Include(l => l.Phim)
+                .Include(l => l.Rap)
+                .Where(l => l.ThoiGianChieu.CompareTo(DateTime.Now) > 0)
+                .ToListAsync();
+
+            ViewData["LichChieu"] = lichchieus.Select(l => new SelectListItem 
+            { 
+                Value = l.MaLichChieuPhim.ToString(), 
+                Text = l.Rap.TenRap + " - " + l.Phim.TenPhim + " - " + l.ThoiGianChieu
+            });
+
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DatVe([Bind("SoDienThoai,MaLichChieuPhim,SoLuong")] DatVe datVe)
+        {
+            var lichchieus = await _context.LichChieuPhims
+                .Include(l => l.Phim)
+                .Include(l => l.Rap)
+                .Where(l => l.ThoiGianChieu.CompareTo(DateTime.Now) > 0)
+                .ToListAsync();
+
+            ViewData["LichChieu"] = lichchieus.Select(l => new SelectListItem
+            {
+                Value = l.MaLichChieuPhim.ToString(),
+                Text = l.Rap.TenRap + " - " + l.Phim.TenPhim + " - " + l.ThoiGianChieu
+            });
+
+            if (ModelState.IsValid)
+            {
+                var lichchieu = lichchieus
+                    .FirstOrDefault(lichchieu => lichchieu.MaLichChieuPhim == datVe.MaLichChieuPhim);
+
+                var rap = await _context.Raps.FirstOrDefaultAsync(rap => rap.MaRap == lichchieu.MaRap);
+
+                var soluongdadat = await _context.DatVes
+                    .Where(d => d.MaLichChieuPhim == datVe.MaLichChieuPhim)
+                    .GroupBy(d => d.MaLichChieuPhim)
+                    .Select(d => new { SoLuong = d.Sum(d => d.SoLuong) })
+                    .FirstOrDefaultAsync();
+
+                if ((rap.SoChoTrong - soluongdadat.SoLuong) < datVe.SoLuong)
+                {
+                    ViewBag.Message = "Số lượng vé có thể đặt tối đa là " + (rap.SoChoTrong - soluongdadat.SoLuong).ToString();
+                    return View(datVe);
+                }    
+
+                _context.Add(datVe);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(DatVe));
+            }
+
+            return View(datVe);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
