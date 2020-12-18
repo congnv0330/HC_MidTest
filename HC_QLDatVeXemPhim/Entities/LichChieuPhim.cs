@@ -10,17 +10,22 @@ namespace HC_QLDatVeXemPhim.Entities
     public class LichChieuPhim
     {
         [Key]
+        public int MaLichChieuPhim { get; set; }
+
         [ForeignKey(nameof(Rap))]
         public int MaRap { get; set; }
 
         public Rap Rap { get; set; }
 
-        [Key]
         [ForeignKey(nameof(Phim))]
         public int MaPhim { get; set; }
+
+        public Phim Phim { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime ThoiGianChieu { get; set; }
+
+        public ICollection<DatVe> DatVes { get; set; }
     }
 }
