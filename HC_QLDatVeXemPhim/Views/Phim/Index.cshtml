@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<HC_QLDatVeXemPhim.Entities.Phim>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách phim";
 }
 
-<h1>Index</h1>
+<h1>Danh sách phim</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.ThoiLuong)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaPhim">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaPhim">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaPhim">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MaPhim">Cập nhật</a> |
+                <a asp-action="Details" asp-route-id="@item.MaPhim">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaPhim">Xóa</a>
             </td>
         </tr>
 }

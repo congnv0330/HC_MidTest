@@ -11,8 +11,10 @@ namespace HC_QLDatVeXemPhim.Entities
         [Key]
         public int MaRap { get; set; }
 
+        [Display(Name = "Tên Rạp")]
         public string TenRap { get; set; }
 
+        [Display(Name = "Số Chỗ Trống")]
         public int SoChoTrong { get; set; }
         
         public ICollection<LichChieuPhim> LichChieuPhims { get; set; }

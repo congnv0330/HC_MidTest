@@ -12,8 +12,10 @@ namespace HC_QLDatVeXemPhim.Entities
         public int MaPhim { get; set; }
 
         [Required]
+        [Display(Name = "Tên Phim")]
         public string TenPhim { get; set; }
 
+        [Display(Name = "Thời Lượng")]
         public int ThoiLuong { get; set; }
 
         public ICollection<LichChieuPhim> LichChieuPhims { get; set; }
