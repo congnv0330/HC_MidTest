@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using HC_QLDatVeXemPhim.Core;
+using HC_QLDatVeXemPhim.Entities;
 
 namespace HC_QLDatVeXemPhim.Controllers
 {
@@ -13,13 +16,25 @@ namespace HC_QLDatVeXemPhim.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DatVeContext _context;
+
+        public HomeController(ILogger<HomeController> logger, DatVeContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewData["phims"] = await _context.Phims.ToListAsync();
+
+            ViewData["raps"] = await _context.Raps.ToListAsync();
+
+            ViewData["lichchieus"] = await _context.LichChieuPhims
+                .Include(l => l.Phim)
+                .Include(l => l.Rap)
+                .ToListAsync();
+
             return View();
         }
 

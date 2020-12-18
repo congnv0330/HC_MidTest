@@ -1,17 +1,53 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var raps = ViewData["raps"] as IEnumerable<HC_QLDatVeXemPhim.Entities.Rap>;
 }
 
 <h5 class="mb-3">Danh sách rạp</h5>
-
-<a href="#" class="text-dark text-decoration-none">
-    <div class="row">
+<div class="row">
+    @foreach (var rap in (IEnumerable<HC_QLDatVeXemPhim.Entities.Rap>)ViewData["raps"])
+    {
         <div class="col-md-4 col-ld-3">
-            <div class="card bg-white">
+            <div class="card">
                 <div class="card-body">
-                    Rạp 1
+                    @rap.TenRap
                 </div>
             </div>
         </div>
-    </div>
-</a>
+    }
+</div>
+
+<hr />
+
+<h5 class="mb-3">Danh sách phim</h5>
+<div class="row">
+    @foreach (var phim in (IEnumerable<HC_QLDatVeXemPhim.Entities.Phim>)ViewData["phims"])
+    {
+        <div class="col-md-4 col-ld-3">
+            <div class="card">
+                <div class="card-body">
+                    @phim.TenPhim
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<hr />
+
+<h5 class="mb-3">Danh sách lịch chiếu</h5>
+<div class="row">
+    @foreach (var lichchieu in (IEnumerable<HC_QLDatVeXemPhim.Entities.LichChieuPhim>)ViewData["lichchieus"])
+    {
+        <div class="col-md-4 col-ld-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text mb-0">Phim: @lichchieu.Phim.TenPhim</p>
+                    <p class="card-text mb-0">Rạp: @lichchieu.Rap.TenRap</p>
+                    <p class="card-text">Thời gian chiếu: @lichchieu.ThoiGianChieu</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
