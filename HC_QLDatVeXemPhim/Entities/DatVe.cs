@@ -13,13 +13,16 @@ namespace HC_QLDatVeXemPhim.Entities
         public int MaDatVe { get; set; }
 
         [Required]
+        [Display(Name = "Số điện thoại")]
         public string SoDienThoai { get; set; }
 
         [ForeignKey(nameof(LichChieuPhim))]
+        [Display(Name = "Lịch chiếu")]
         public int MaLichChieuPhim { get; set; }
 
         public LichChieuPhim LichChieuPhim { get; set; }
 
+        [Display(Name = "Vé được đặt lúc")]
         public DateTime ThoiGianDat { get; set; }
     }
 }

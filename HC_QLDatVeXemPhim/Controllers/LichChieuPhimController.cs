@@ -46,6 +46,31 @@ namespace HC_QLDatVeXemPhim.Controllers
             return View(lichChieuPhim);
         }
 
+        // GET: LichChieuPhim/Viewers/5
+        public async Task<IActionResult> Viewers(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var danhSachNguoiXem = await _context.DatVes
+                .Include(l => l.LichChieuPhim).ThenInclude(x => x.Rap)
+                .Include(l => l.LichChieuPhim).ThenInclude(x => x.Phim)
+                .Where(m => m.MaLichChieuPhim == id).ToListAsync();
+
+            ViewData["Rap"] = (await _context.LichChieuPhims
+                .Include(x => x.Rap)
+                .SingleOrDefaultAsync(x => x.MaLichChieuPhim == id)).Rap;
+
+            if (danhSachNguoiXem == null)
+            {
+                return NotFound();
+            }
+
+            return View(danhSachNguoiXem);
+        }
+
         // GET: LichChieuPhim/Create
         public IActionResult Create()
         {
