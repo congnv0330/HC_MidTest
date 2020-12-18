@@ -23,7 +23,7 @@ namespace HC_QLDatVeXemPhim.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult DatVe()
         {
             return View();
         }

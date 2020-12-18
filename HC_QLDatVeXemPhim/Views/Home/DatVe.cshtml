@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Đặt vé";
+}
+
+<h5 class="mb-3">Đặt vé xem phim</h5>
+
+<form action="/" method="post">
+    <div class="form-group">
+        <label for="sdt">Số điện thoại</label>
+        <input type="text" class="form-control" id="sdt" name="SoDienThoai" />
+    </div>
+    <div class="form-group">
+        <label for="lichchieu">Lịch chiếu hiện tại</label>
+        <select id="lichchieu" class="custom-select">
+            <option>Alo</option>
+        </select>
+    </div>
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Đặt vé</button>
+    </div>
+</form>
